@@ -6,20 +6,6 @@ spring:
     encoding: UTF-8
     cache-period: 0
 
-
-  http:
-      multipart:
-        max-file-size: 20Mb
-        maxRequestSize: 20Mb
-      client:
-          config:
-            socketTimeout: 10000
-            connectTimeout: 5000
-            connectionRequestTimeout: 500
-            soTimeout: 10000
-            maxTotal: 1000
-            defaultMaxPerRoute: 500
-
 mybatis:
   type-aliases-package: com.example.demo.entity
   mapper-locations: classpath:mapper/*Mapper.xml

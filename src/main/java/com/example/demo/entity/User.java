@@ -1,16 +1,10 @@
 package com.example.demo.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.Date;
 
 @ToString
-@Builder(toBuilder = true)
-@NoArgsConstructor
-@AllArgsConstructor
 public class User {
     private Integer id;
 

@@ -23,9 +23,13 @@ spring:
 # Server settings (ServerProperties)
 server:
   port: 8084
-  context-path: /
+  servlet:
+    context-path: /
 
 
 log:
   level: INFO
   path: D:/logs/springboot_demo
+
+cors:
+  allowedOrigins: 'http://192.168.1.116:8088'
