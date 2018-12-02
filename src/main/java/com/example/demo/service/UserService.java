@@ -18,16 +18,16 @@ import java.util.List;
 @Slf4j
 @Service
 public class UserService {
+
     @Resource
     private UserMapper userMapper;
 
     public Result add(User user) {
         Date now = new Date();
-        user.setCreateTs(now);
-        user.setUpdateTs(now);
+        user = user.toBuilder().createTs(now).updateTs(now).build();
         userMapper.insertSelective(user);
-        log.info("保存用戶成功,User#{}", user);
-        return Result.builder().msg("success").build();
+        log.info("保存用户成功,User#{}", user);
+        return Result.builder().msg("保存成功").build();
     }
 
     public Result select(String username) {
@@ -37,6 +37,6 @@ public class UserService {
         }
         List<User> users = userMapper.selectByExample(example);
         log.info("users#{}", users);
-        return Result.builder().msg("success").data(users).build();
+        return Result.builder().msg("查询成功").data(users).build();
     }
 }

@@ -25,7 +25,7 @@ public class TestController {
             return userService.add(user);
         } catch (Exception e) {
             log.error("add user error#{}", e);
-            return Result.builder().code(-1).msg("保存用戶失敗").build();
+            return Result.builder().code(-1).msg("保存失败").build();
         }
     }
 
@@ -36,7 +36,7 @@ public class TestController {
             return userService.select(username);
         } catch (Exception e) {
             log.error("search user error#{}", e);
-            return Result.builder().code(-1).msg("查詢用戶失敗").build();
+            return Result.builder().code(-1).msg("查询出错").build();
         }
     }
 }
