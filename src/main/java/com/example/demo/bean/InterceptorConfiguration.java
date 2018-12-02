@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-public abstract class InterceptorConfiguration implements WebMvcConfigurer {
+public class InterceptorConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {// 登录校验
