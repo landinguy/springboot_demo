@@ -2,8 +2,13 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
+    <!-- home -->
+    <!--<classPathEntry location="E:\mavenRepository\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar"/>-->
+
+    <!-- company -->
     <classPathEntry
-            location="E:\mavenRepository\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar"/>
+            location="D:\Application\mavenRepository\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar"/>
+
     <context id="context1">
         <!-- 去掉自动生成的注释 -->
         <commentGenerator>
@@ -21,8 +26,7 @@
         <sqlMapGenerator targetPackage="mapper" targetProject="src\main\resources"/>
 
         <!-- dao -->
-        <javaClientGenerator targetPackage="com.example.demo.dao" targetProject="src\main\java"
-                             type="XMLMAPPER"/>
+        <javaClientGenerator targetPackage="com.example.demo.dao" targetProject="src\main\java" type="XMLMAPPER"/>
 
         <table tableName="user" domainObjectName="User" enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
