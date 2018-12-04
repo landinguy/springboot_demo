@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.junit_test;
 
 import com.example.demo.dao.UserMapper;
 import com.example.demo.entity.User;
