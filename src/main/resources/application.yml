@@ -6,6 +6,18 @@ spring:
     encoding: UTF-8
     cache-period: 0
 
+  mail:
+    host: smtp.qq.com
+    username: 1470263407@qq.com
+    password: yoxkgpxtyllubadg
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
 mybatis:
   type-aliases-package: com.example.demo.entity
   mapper-locations: classpath:mapper/*Mapper.xml
