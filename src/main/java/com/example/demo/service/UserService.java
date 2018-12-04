@@ -38,7 +38,7 @@ public class UserService {
         example.setPageSize(req.getPageSize());
         UserExample.Criteria criteria = example.createCriteria();
         if (!StringUtils.isEmpty(req.getUsername())) {
-            criteria.andUsernameLike(req.getUsername());
+            criteria.andUsernameLike(req.getUsername() + "%");
         }
         List<User> users = userMapper.selectByExample(example);
         log.info("users#{}", users);
