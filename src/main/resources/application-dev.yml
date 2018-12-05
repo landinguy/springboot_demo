@@ -17,7 +17,20 @@ spring:
     testOnBorrow: false
     testOnReturn: false
     poolPreparedStatements: true
-    maxOpenPreparedStatements:
+
+
+  application:
+    name: springboot-rabbitmq
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: xxf
+    password: 123456
+    cache:
+      channel:
+        size: 8
+
+
 
 
 # Server settings (ServerProperties)

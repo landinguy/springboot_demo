@@ -1,7 +1,9 @@
 package com.example.demo;
 
 import com.example.demo.config.MailConfig;
+import com.example.demo.entity.User;
 import com.example.demo.junit_test.UserService;
+import com.example.demo.rabbit.Sender;
 import com.example.demo.util.Result;
 import com.example.demo.view.req.UserReq;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +15,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by xxf on 2018/12/2 0002.
@@ -28,6 +31,8 @@ public class JunitTest {
     private MailConfig mailConfig;
     @Resource
     private UserService userService;
+    @Resource
+    private Sender sender;
 
     @Test
     public void count() {
@@ -45,5 +50,19 @@ public class JunitTest {
 
         javaMailSender.send(message);
     }
+
+    @Test
+    public void rabbitTest() {
+        Result result = userService.select(new UserReq("", 1, 10));
+        List<User> users = (List<User>) result.getData();
+//        users.forEach(item -> sender.sendToFanoutExchange(item));
+//        users.forEach(item -> sender.sendToQuene("queueA", item));
+
+        //A,B队列都将收到消息
+//        users.forEach(item -> sender.sendToTopicExchange(item, "topic.a"));
+        //只有B收到消息
+        users.forEach(item -> sender.sendToTopicExchange(item, "topic.random"));
+    }
+
 
 }
