@@ -9,7 +9,9 @@ import com.example.demo.view.req.UserReq;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -33,6 +35,8 @@ public class JunitTest {
     private UserService userService;
     @Resource
     private Sender sender;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     @Test
     public void count() {
@@ -62,6 +66,16 @@ public class JunitTest {
 //        users.forEach(item -> sender.sendToTopicExchange(item, "topic.a"));
         //只有B收到消息
         users.forEach(item -> sender.sendToTopicExchange(item, "topic.random"));
+    }
+
+    @Test
+    public void redisTest() {
+        Result result = userService.select(new UserReq("", 1, 10));
+        List<User> users = (List<User>) result.getData();
+//
+        users.forEach(item -> redisTemplate.opsForValue().set("cache:user:" + item.getId(), item.toString()));
+
+//        log.info(redisTemplate.opsForValue().get("cache:user:1"));
     }
 
 
