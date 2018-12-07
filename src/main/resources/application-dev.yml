@@ -18,7 +18,7 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
 
-# rabbitmq
+  # rabbitmq
   application:
     name: springboot-rabbitmq
   rabbitmq:
@@ -31,9 +31,9 @@ spring:
         size: 8
 
 # redis
-  redis:
+#  redis:
 #    host: localhost
-    password: 123456
+#    password:
 #    port: 6379
 
 # Server settings (ServerProperties)

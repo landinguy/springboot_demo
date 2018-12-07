@@ -4,12 +4,14 @@ import com.example.demo.config.MailConfig;
 import com.example.demo.entity.User;
 import com.example.demo.junit_test.UserService;
 import com.example.demo.rabbit.Sender;
+import com.example.demo.util.RedisUtil;
 import com.example.demo.util.Result;
 import com.example.demo.view.req.UserReq;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
@@ -76,6 +78,22 @@ public class JunitTest {
         users.forEach(item -> redisTemplate.opsForValue().set("cache:user:" + item.getId(), item.toString()));
 
 //        log.info(redisTemplate.opsForValue().get("cache:user:1"));
+    }
+
+//    @Resource
+//    private RedisProperties properties;
+//
+//    @Test
+//    public void testss() {
+//        log.info("nodes#{}", properties.getCluster().getNodes().get(0));
+//    }
+
+    @Resource
+    private RedisUtil redisUtil;
+
+    @Test
+    public void jedisTest() {
+        redisUtil.set("test127", "test127");
     }
 
 
