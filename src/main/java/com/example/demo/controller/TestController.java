@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.User;
-import com.example.demo.junit_test.UserService;
+import com.example.demo.service.UserService;
 import com.example.demo.util.Result;
 import com.example.demo.view.req.UserReq;
 import lombok.extern.slf4j.Slf4j;

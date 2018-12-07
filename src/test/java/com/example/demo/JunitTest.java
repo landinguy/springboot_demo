@@ -2,18 +2,15 @@ package com.example.demo;
 
 import com.example.demo.config.MailConfig;
 import com.example.demo.entity.User;
-import com.example.demo.junit_test.UserService;
 import com.example.demo.rabbit.Sender;
-import com.example.demo.util.RedisUtil;
+import com.example.demo.service.RedisService;
+import com.example.demo.service.UserService;
 import com.example.demo.util.Result;
 import com.example.demo.view.req.UserReq;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -37,8 +34,8 @@ public class JunitTest {
     private UserService userService;
     @Resource
     private Sender sender;
-    @Autowired
-    private StringRedisTemplate redisTemplate;
+    @Resource
+    private RedisService redisService;
 
     @Test
     public void count() {
@@ -74,27 +71,10 @@ public class JunitTest {
     public void redisTest() {
         Result result = userService.select(new UserReq("", 1, 10));
         List<User> users = (List<User>) result.getData();
-//
-        users.forEach(item -> redisTemplate.opsForValue().set("cache:user:" + item.getId(), item.toString()));
+//        users.forEach(item -> redisService.set("cache:user:" + item.getId(), item));
 
-//        log.info(redisTemplate.opsForValue().get("cache:user:1"));
+        users.forEach(item -> redisService.lSet("user:list", item));
+        log.info("user:list#llen#{}", redisService.lGetListSize("user:list"));
     }
-
-//    @Resource
-//    private RedisProperties properties;
-//
-//    @Test
-//    public void testss() {
-//        log.info("nodes#{}", properties.getCluster().getNodes().get(0));
-//    }
-
-    @Resource
-    private RedisUtil redisUtil;
-
-    @Test
-    public void jedisTest() {
-        redisUtil.set("test127", "test127");
-    }
-
 
 }

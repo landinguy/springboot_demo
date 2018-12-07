@@ -1,4 +1,4 @@
-package com.example.demo.util;
+package com.example.demo.service;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @Component
-public class RedisUtil {
+public class RedisService {
 
     @Resource
     private RedisTemplate redisTemplate;
@@ -75,8 +75,6 @@ public class RedisUtil {
             }
         }
     }
-
-    //============================String=============================
 
     /**
      * 普通缓存获取
