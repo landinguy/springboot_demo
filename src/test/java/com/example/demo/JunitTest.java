@@ -16,6 +16,14 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 /**
@@ -75,6 +83,31 @@ public class JunitTest {
 
         users.forEach(item -> redisService.lSet("user:list", item));
         log.info("user:list#llen#{}", redisService.lGetListSize("user:list"));
+    }
+
+    /**
+     * Files类的使用
+     */
+    @Test
+    public void filesTest() {
+        try {
+//            BufferedReader br = Files.newBufferedReader(Paths.get("d:\\province.sql"), StandardCharsets.UTF_8);
+//            BufferedWriter bw = Files.newBufferedWriter(Paths.get("d:\\province_copy.sql"), StandardCharsets.UTF_8);
+//            String str;
+//            while ((str = br.readLine()) != null) {
+//                bw.write(str);
+//                bw.newLine();
+////                log.info(str);
+//            }
+//            bw.flush();
+//            bw.close();
+//            br.close();
+
+            Files.copy(Paths.get("d:\\province.sql"), Paths.get("d:\\province_copy.sql"), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            log.error("do file error#{}", e);
+        }
+
     }
 
 }
