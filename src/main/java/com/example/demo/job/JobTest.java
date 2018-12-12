@@ -26,42 +26,42 @@ public class JobTest {
 //        log.info("北京时间#{}", date);
 //    }
 
-    @Scheduled(cron = "0 10 23 * * ?")
-    public void sendMail() {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(mailConfig.getUsername());
-        message.setTo("1029573528@qq.com");
-        message.setSubject("主题：睡觉提醒");
-        message.setText("亲爱的小飞，已经 22:30 啦！早点休息哦~~");
+//    @Scheduled(cron = "0 10 23 * * ?")
+//    public void sendMail() {
+//        SimpleMailMessage message = new SimpleMailMessage();
+//        message.setFrom(mailConfig.getUsername());
+//        message.setTo("1029573528@qq.com");
+//        message.setSubject("主题：睡觉提醒");
+//        message.setText("亲爱的小飞，已经 22:30 啦！早点休息哦~~");
+//
+//        javaMailSender.send(message);
+//    }
 
-        javaMailSender.send(message);
-    }
 
-
-    @Scheduled(cron = "0/5 * * * * ?")
-    public void test() {
-        log.info("start..........");
-        int n = 0;
-        try {
-            while (true) {
-                n++;
-                if (n > 10000) {
-                    log.info("quite........");
-                    Thread.sleep(5000);
-                    break;
-                }
-                if (n % 1000 != 0) {
-                    log.info("n{}", n);
-                } else {
-                    log.info("....n#{}", n);
-                    Thread.sleep(2000);
-                    continue;
-                }
-            }
-        } catch (Exception e) {
-            log.info("e#{}", e);
-        }
-    }
+//    @Scheduled(cron = "0/5 * * * * ?")
+//    public void test() {
+//        log.info("start..........");
+//        int n = 0;
+//        try {
+//            while (true) {
+//                n++;
+//                if (n > 10000) {
+//                    log.info("quite........");
+//                    Thread.sleep(5000);
+//                    break;
+//                }
+//                if (n % 1000 != 0) {
+//                    log.info("n{}", n);
+//                } else {
+//                    log.info("....n#{}", n);
+//                    Thread.sleep(2000);
+//                    continue;
+//                }
+//            }
+//        } catch (Exception e) {
+//            log.info("e#{}", e);
+//        }
+//    }
 
 
 }

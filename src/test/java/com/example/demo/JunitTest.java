@@ -16,12 +16,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
@@ -107,6 +103,14 @@ public class JunitTest {
         } catch (IOException e) {
             log.error("do file error#{}", e);
         }
+
+    }
+
+    @Test
+    public void xTest() {
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.fluentPut("key1", "value1").fluentPut("key2", "value2");
+//        log.info("size#{},jsonObject#{}", jsonObject.size(), jsonObject);
 
     }
 
