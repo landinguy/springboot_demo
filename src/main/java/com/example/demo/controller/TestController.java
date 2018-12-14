@@ -5,9 +5,12 @@ import com.example.demo.service.UserService;
 import com.example.demo.util.Result;
 import com.example.demo.view.req.UserReq;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -17,9 +20,14 @@ public class TestController {
     private UserService userService;
 
     @PostMapping("/addUser")
-    public Result addUser(@RequestBody User user) {
+    public Result addUser(@Valid @RequestBody User user, BindingResult bindingResult) {
         try {
             log.info("User#{}", user);
+            if (bindingResult.hasErrors()) {
+                String errMsg = bindingResult.getAllErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.joining(","));
+                log.info("@Valid not pass,errMsg#{}", errMsg);
+                return Result.builder().code(-1).msg("参数校验未通过：" + errMsg).build();
+            }
             return userService.add(user);
         } catch (Exception e) {
             log.error("add user error#{}", e);
