@@ -56,4 +56,27 @@ public class TestController {
             return Result.builder().code(-1).msg("查询出错").build();
         }
     }
+
+    /**
+     * 前端为multipart/form-data post请求方式，后端参数获取及验证
+     *
+     * @param user
+     * @param bindingResult
+     * @return
+     */
+    @PostMapping("/test")
+    public Result test(@Valid User user, BindingResult bindingResult) {
+        try {
+            log.info("user#{}", user);
+            if (bindingResult.hasErrors()) {
+                String errMsg = bindingResult.getAllErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.joining(","));
+                log.info("@Valid not pass,errMsg#{}", errMsg);
+                return Result.builder().code(-1).msg("参数校验未通过：" + errMsg).build();
+            }
+            return userService.add(user);
+        } catch (Exception e) {
+            log.error("add user error#{}", e);
+            return Result.builder().code(-1).msg("保存失败").build();
+        }
+    }
 }
