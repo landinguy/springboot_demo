@@ -1,8 +1,10 @@
 package com.example.demo;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.example.demo.config.MailConfig;
 import com.example.demo.entity.User;
 import com.example.demo.rabbit.Sender;
+import com.example.demo.service.DemoService;
 import com.example.demo.service.RedisService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.Result;
@@ -112,6 +114,14 @@ public class JunitTest {
 //        jsonObject.fluentPut("key1", "value1").fluentPut("key2", "value2");
 //        log.info("size#{},jsonObject#{}", jsonObject.size(), jsonObject);
 
+    }
+
+    @Reference
+    private DemoService demoService;
+
+    @Test
+    public void dubboTest() {
+        log.info("sum#{}", demoService.add(520, 1314));
     }
 
 }
