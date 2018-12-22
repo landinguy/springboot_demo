@@ -18,18 +18,16 @@ spring:
       channel:
         size: 8
 
-  # dubbo
+  #Dubbo 配置
   dubbo:
     application:
-      name: demo-consumer
-    base-package: com.example.demo.service  # dubbo服务调用者所在的包
+      id: springboot_demo
+      name: springboot_demo
     registry:
-      address: 127.0.0.1                    # zookeeper注册中心的地址
-      port: 2181                            # zookeeper注册中心的端口
-    consumer:
-      timeout: 1000
-      check: true                           # 服务启动时检查被调用服务是否可用
-      retries: 2                            # 服务调用重试次数
+      address: zookeeper://127.0.0.1:2181
+    protocol:
+      name: dubbo
+      port: 20800
 
   # redis
   redis:

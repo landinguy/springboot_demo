@@ -4,7 +4,6 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.example.demo.config.MailConfig;
 import com.example.demo.entity.User;
 import com.example.demo.rabbit.Sender;
-import com.example.demo.service.DemoService;
 import com.example.demo.service.RedisService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.Result;
@@ -16,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
+import service.DemoService;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -116,7 +116,7 @@ public class JunitTest {
 
     }
 
-    @Reference
+    @Reference(check = false)
     private DemoService demoService;
 
     @Test
