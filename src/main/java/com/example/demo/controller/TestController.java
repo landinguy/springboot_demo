@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.Result;
@@ -9,9 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import service.DemoService;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -23,8 +20,8 @@ public class TestController {
 
     @Resource
     private UserService userService;
-    @Reference(check = false)
-    private DemoService demoService;
+//    @Reference(check = false)
+//    private DemoService demoService;
 
     @PostMapping("/addUser")
     public Result addUser(@Valid @RequestBody User user, BindingResult bindingResult) {
@@ -87,12 +84,12 @@ public class TestController {
         }
     }
 
-    @RequestMapping("/add")
-    public String add(Integer a, Integer b) {
-        log.info("a#{},b#{}", a, b);
-        Integer sum = demoService.add(a, b);
-        String result = a + "+" + b + "=" + sum;
-        log.info(result);
-        return result;
-    }
+//    @RequestMapping("/add")
+//    public String add(Integer a, Integer b) {
+//        log.info("a#{},b#{}", a, b);
+//        Integer sum = demoService.add(a, b);
+//        String result = a + "+" + b + "=" + sum;
+//        log.info(result);
+//        return result;
+//    }
 }
