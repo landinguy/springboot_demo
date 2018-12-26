@@ -2,6 +2,9 @@ package com.example.demo;
 
 import com.example.demo.config.MailConfig;
 import com.example.demo.entity.User;
+import com.example.demo.others.strategy.Color;
+import com.example.demo.others.strategy.Flower;
+import com.example.demo.others.strategy.Red;
 import com.example.demo.rabbit.Sender;
 import com.example.demo.service.RedisService;
 import com.example.demo.service.UserService;
@@ -121,5 +124,29 @@ public class JunitTest {
 //    public void dubboTest() {
 //        log.info("sum#{}", demoService.add(520, 1314));
 //    }
+
+    /**
+     * 策略模式测试
+     */
+    @Test
+    public void test1() {
+
+        /** 不使用策略模式 **/
+//        Flower flower = new Flower();
+//        flower.setColor(Color.PINK);
+//        if (flower.getColor().equals(Color.PINK)) {
+//            log.info("I have a pink flower");
+//        } else if (flower.getColor().equals(Color.RED)) {
+//            log.info("I have a red flower");
+//        } else if (flower.getColor().equals(Color.WHITE)) {
+//            log.info("I have a white flower");
+//        }
+
+        /** 使用策略模式 **/
+        Flower f = new Flower();
+        f.setColorInterface(new Red());
+        log.info("msg#{}", f.getMsg());
+
+    }
 
 }
