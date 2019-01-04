@@ -2,7 +2,6 @@ package com.example.demo;
 
 import com.example.demo.config.MailConfig;
 import com.example.demo.entity.User;
-import com.example.demo.others.strategy.Color;
 import com.example.demo.others.strategy.Flower;
 import com.example.demo.others.strategy.Red;
 import com.example.demo.rabbit.Sender;
@@ -11,6 +10,7 @@ import com.example.demo.service.UserService;
 import com.example.demo.util.Result;
 import com.example.demo.view.req.UserReq;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,6 +24,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by xxf on 2018/12/2 0002.
@@ -148,5 +149,37 @@ public class JunitTest {
         log.info("msg#{}", f.getMsg());
 
     }
+
+    @Test
+    public void testOptional() {
+        String str = "optional";
+        Optional<String> op1 = Optional.of(str);
+        Optional<Object> op2 = Optional.empty();
+
+        /** orElse 存在即返回, 无则提供默认值 **/
+//        log.info("value#{}", op1.orElse("default"));//optional
+//        log.info("value#{}", op2.orElse("default"));//default
+
+        /** orElseGet 存在即返回, 无则由函数来产生 **/
+//        log.info("value#{}", op1.orElseGet(this::getString));//optional
+//        log.info("value#{}", op2.orElseGet(this::getString));//default
+
+        /** ifPresent 存在才对它做点什么 **/
+//        op1.ifPresent(item -> log.info("item1#{}", item));//optional
+//        op2.ifPresent(item -> log.info("item2#{}", item));
+
+        /** map username存在,反转,否则输出default **/
+        User user = new User();
+        user.setUsername("jack");
+        Optional<User> u = Optional.of(user);
+        String result = u.map(User::getUsername).map(StringUtils::reverse).orElse("default");
+        log.info("result#{}", result);
+
+    }
+
+    private String getString() {
+        return "default";
+    }
+
 
 }
