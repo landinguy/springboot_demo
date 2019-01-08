@@ -19,12 +19,17 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by xxf on 2018/12/2 0002.
@@ -179,6 +184,50 @@ public class JunitTest {
 
     private String getString() {
         return "default";
+    }
+
+    @Test
+    public void generateSql() {
+        try {
+            StringBuilder sb = new StringBuilder("INSERT INTO \"FLOW_SSP\".\"SP_NUMBER_APPLY_INFO\" (");
+            sb.append("CHANNEL_NUMBER,")
+                    .append("SP_NUMBER,")
+                    .append("LOCAL_IP,")
+                    .append("LOCAL_PORT,")
+                    .append("UPSTREAM_ACCOUNT,")
+                    .append("UPSTREAM_PASSWORD,")
+                    .append("DOWNSTREAM_ACCOUNT,")
+                    .append("DOWNSTREAM_PASSWORD,")
+                    .append("COMPANY_CODE,")
+                    /** 额外字段 **/
+                    .append("BUID,")
+                    .append("SUPPORT_BUSINESS_TYPE,")
+                    .append("IP_PORT,")
+                    .append("APPLY_STATUS,")
+                    .append("STATUS,")
+                    .append("TOMCAT_PORT) VALUES (");
+            String extraValues = ",\'91023860\',\'0,1,2\',\'10.95.98.42:8881\',\'1\',\'1\',\'9090\');";//额外字段的值
+            BufferedReader br = Files.newBufferedReader(Paths.get("d:\\data.csv"), StandardCharsets.UTF_8);
+            BufferedWriter bw = Files.newBufferedWriter(Paths.get("d:\\data.sql"), StandardCharsets.UTF_8);
+            String str;
+            while ((str = br.readLine()) != null) {
+                StringBuilder builder = new StringBuilder(sb);
+                builder.append(addMH(str)).append(extraValues);
+                bw.write(builder.toString());
+                bw.newLine();
+            }
+            bw.flush();
+            bw.close();
+            br.close();
+        } catch (Exception e) {
+            log.info("e#{}", e);
+        }
+    }
+
+    public String addMH(String str) {
+        String[] arr = str.split(",");
+        String result = Arrays.stream(arr).map(item -> "\'" + item + "\'").collect(Collectors.joining(","));
+        return result;
     }
 
 
