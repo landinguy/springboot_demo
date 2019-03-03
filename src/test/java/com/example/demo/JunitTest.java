@@ -121,6 +121,20 @@ public class JunitTest {
 //        jsonObject.fluentPut("key1", "value1").fluentPut("key2", "value2");
 //        log.info("size#{},jsonObject#{}", jsonObject.size(), jsonObject);
 
+//        String s1 = "ab";
+//        String s2 = s1.intern();
+//        String s3 = new String("ab");
+//        log.info("s1 == s2 ?#{}", s1 == s2);
+//        log.info("s1 == s3 ?#{}", s1 == s3);
+
+//        log.info("3 * 0.1 == 0.3 ?#{}", 3 * 0.1 == 0.3);
+
+//        short s = 1;
+//        s = s + 1;//错误
+//        s = (short) (s + 1);//正确
+//        s += 1;//正确
+
+
     }
 
 //    @Reference(check = false)
