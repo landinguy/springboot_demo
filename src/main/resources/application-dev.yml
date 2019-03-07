@@ -6,6 +6,12 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 
+  #上传文件配置
+  servlet:
+    multipart:
+      maxFileSize: 100MB
+      maxRequestSize: 200MB
+
   # rabbitmq
   application:
     name: springboot-rabbitmq
