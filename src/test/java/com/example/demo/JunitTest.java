@@ -244,5 +244,18 @@ public class JunitTest {
         return result;
     }
 
+    @Test
+    public void testUrl() throws Exception {
+//        URL url = new URL("http://27.115.67.198:10001/smsfile/resource/62BA967F83954AE190C55D8D838E36CC.jpg?name=xxf#index");
+//        log.info("###{}",url.getProtocol());
+//        log.info("###{}",url.getHost());
+//        log.info("###{}",url.getPort());
+//        log.info("###{}",url.getFile());
+//        log.info("###{}",url.getPath());
+//        log.info("###{}",url.getQuery());
+//        log.info("###{}",url.getRef());
+
+    }
+
 
 }
