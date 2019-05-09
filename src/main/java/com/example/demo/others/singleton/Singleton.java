@@ -21,6 +21,8 @@ public class Singleton {
 
     public static Singleton getInstance() {
         if (singleton == null) {
+            // System.out.println("等待获取对象锁，threadName#" + Thread.currentThread().getName());
+            // Thread.sleep(2000);
             synchronized (Singleton.class) {
                 if (singleton == null) {
                     singleton = new Singleton();
@@ -39,6 +41,33 @@ public class Singleton {
             }
         }
         return singleton;
+    }
+
+    /*** 通过静态内部类实现单例 ***/
+    private static class SingletonHandler {
+        private static Singleton singleton = new Singleton();
+    }
+
+    public static Singleton getInstanceByHandler() {
+        return SingletonHandler.singleton;
+    }
+
+    /*** 通过枚举类实现单例 ***/
+    private enum MyEnumSingleton {
+        factory;
+        private Singleton singleton;
+
+        private MyEnumSingleton() {
+            singleton = new Singleton();
+        }
+
+        public Singleton getSingleton() {
+            return singleton;
+        }
+    }
+
+    public static Singleton getInstanceByEnum() {
+        return MyEnumSingleton.factory.getSingleton();
     }
 
 }
