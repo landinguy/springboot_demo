@@ -7,7 +7,10 @@ import com.example.demo.util.Result;
 import com.example.demo.view.req.UserReq;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.aop.framework.AopContext;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -23,14 +26,26 @@ public class UserService {
     @Resource
     private UserMapper userMapper;
 
-    public Result add(User user) {
+    // @Transactional(rollbackFor = Exception.class)
+    public Result add(User user) throws Exception {
         Date now = new Date();
         user.setCreateTs(now);
         user.setUpdateTs(now);
         userMapper.insertSelective(user);
+
+        // UserService proxy = (UserService) AopContext.currentProxy();
+        // proxy.testTx(user);
+
         log.info("保存用户成功,User#{}", user);
         return Result.builder().msg("保存成功").build();
     }
+
+    // @Transactional(rollbackFor = Exception.class)
+    // public void testTx(User user) throws Exception {
+    //     user.setUsername("testTx");
+    //     userMapper.insertSelective(user);
+    //     throw new Exception("事务测试");
+    // }
 
     public Result select(UserReq req) {
         UserExample example = new UserExample();

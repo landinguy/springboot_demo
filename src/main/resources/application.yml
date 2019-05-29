@@ -18,6 +18,10 @@ spring:
             enable: true
             required: true
 
+  #提交事务异常时回滚
+#  transaction:
+#    rollback-on-commit-failure: true
+
 mybatis:
   type-aliases-package: com.example.demo.entity
   mapper-locations: classpath:mapper/*Mapper.xml
