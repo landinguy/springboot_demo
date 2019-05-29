@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class Receiver {
 
-    @RabbitHandler
-    @RabbitListener(queues = "queueA")
+    // @RabbitHandler
+    // @RabbitListener(queues = "queueA")
     public void process1(String msg) {
         log.info("ReceiverA:msg#{}", msg);
     }
 
-    @RabbitHandler
-    @RabbitListener(queues = "queueB")
+    // @RabbitHandler
+    // @RabbitListener(queues = "queueB")
     public void process2(String msg) {
         log.info("ReceiverB:msg#{}", msg);
     }

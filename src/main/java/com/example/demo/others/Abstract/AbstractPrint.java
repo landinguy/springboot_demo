@@ -5,10 +5,14 @@ package com.example.demo.others.Abstract;
  */
 public abstract class AbstractPrint {
 
-    public abstract void print(String str);
+    public abstract void beforePrint();
 
-    public void excutePrint(String str) {
-        print(str);
+    public abstract void afterPrint();
+
+    public void execute(String str) {
+        beforePrint();
+        System.out.println("str: " + str);
+        afterPrint();
     }
 
 }

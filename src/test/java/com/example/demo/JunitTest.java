@@ -9,6 +9,7 @@ import com.example.demo.service.RedisService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.Result;
 import com.example.demo.view.req.UserReq;
+import com.springstudy.service.HelloService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -255,6 +256,14 @@ public class JunitTest {
 //        log.info("###{}",url.getQuery());
 //        log.info("###{}",url.getRef());
 
+    }
+
+    @Resource
+    private HelloService helloService;
+
+    @Test
+    public void testHelloService() {
+        log.info(helloService.sayHello());
     }
 
 
