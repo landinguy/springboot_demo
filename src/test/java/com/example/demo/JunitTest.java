@@ -2,8 +2,8 @@ package com.example.demo;
 
 import com.example.demo.config.MailConfig;
 import com.example.demo.entity.User;
-import com.example.demo.others.strategy.Flower;
-import com.example.demo.others.strategy.Red;
+import com.example.demo.others.strategy.demo1.Flower;
+import com.example.demo.others.strategy.demo1.Red;
 import com.example.demo.rabbit.Sender;
 import com.example.demo.service.RedisService;
 import com.example.demo.service.UserService;

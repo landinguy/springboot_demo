@@ -1,4 +1,4 @@
-package com.example.demo.others.strategy;
+package com.example.demo.others.strategy.demo1;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
