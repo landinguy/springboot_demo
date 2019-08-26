@@ -3,7 +3,7 @@ package com.example.demo.others.adapter;
 /**
  * Created by xxf on 2018/9/20 0020.
  * <p>
- * 电压适配器
+ * 适配器类
  */
 public class Adapter extends Adaptee implements Transfer {
     @Override
