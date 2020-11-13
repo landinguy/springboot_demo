@@ -1,0 +1,47 @@
+package com.example.demo.controller;
+
+import com.example.demo.entity.User;
+import com.example.demo.service.UserService;
+import com.example.demo.util.Result;
+import com.example.demo.view.req.UserReq;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.stream.Collectors;
+
+@Slf4j
+@RestController
+@Api(value = "test", tags = {"测试接口"})
+public class TestController {
+
+    @Resource
+    private KafkaTemplate<String, Object> kafkaTemplate;
+
+
+    @GetMapping("kafka/send")
+    @ApiOperation(value = "发送kafka消息")
+    public void send(String topic, String msg) {
+        while (true) {
+            try {
+                for (int i = 0; i < 100; i++) {
+                    kafkaTemplate.send(topic, msg + i);
+                }
+                kafkaTemplate.send(topic, "--------------");
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+}
