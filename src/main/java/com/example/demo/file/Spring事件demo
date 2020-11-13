@@ -1,0 +1,38 @@
+package com.example.demo.others.spring_event;
+
+import org.springframework.context.ApplicationEvent;
+
+/**
+ * @author landing guy
+ * @date 2020.10.29
+ */
+public class EventDemo extends ApplicationEvent {
+    private String msg;
+
+    public EventDemo(Object source, String msg) {
+        super(source);
+        this.msg = msg;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+}
+
+
+package com.example.demo.others.spring_event;
+
+import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
+
+/**
+ * @author landing guy
+ * @date 2020.10.29
+ */
+@Component
+public class EventDemoListener implements ApplicationListener<EventDemo> {
+    @Override
+    public void onApplicationEvent(EventDemo event) {
+        System.out.println("receive###" + event.getMsg());
+    }
+}
